@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>whos the hottest sirius staff</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: black;
+      }
+      #timer {
+        font-size: 2rem;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 2rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      label {
+        margin-bottom: 1rem;
+      }
+      input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid black;
+        border-radius: 5px;
+        outline: none;
+      }
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      input[type="submit"]:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">Sirius Guard Release</div>
+    <div id="timer">Time left: <span id="time">60</span></div>
+    <form>
+      <label for="answer">who is the hottest sirius staff member</label>
+      <input type="text" id="answer" name="answer">
+      <br>
+      <input type="submit" value="Submit" onclick="checkAnswer()">
+    </form>
+    <script>
+      var timeLeft = 60;
+      var timer = document.getElementById("time");
+
+      function updateTime() {
+        timer.innerHTML = timeLeft;
+        timeLeft--;
+        if (timeLeft < -1) {
+          clearInterval(intervalId);
+          alert("Sirius Guard Will never release :laugh:");
+        }
+      }
+
+      var intervalId = setInterval(updateTime, 1000);
+
+      function checkAnswer() {
+        var answer = document.getElementById("answer").value;
+        if (answer.toLowerCase() === "zumo") {
+          clearInterval(intervalId);
+          alert("Zumo is the hottest!");
+        } else {
+          alert("Wrong!1!1");
+        }
+      }
+    </script>
+  </body>
+</html>
