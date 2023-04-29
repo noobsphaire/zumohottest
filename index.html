@@ -77,8 +77,8 @@
         timeLeft--;
         timer.textContent = timeLeft;
         if (timeLeft === 0) {
-          dialog.showModal();
           clearInterval(intervalId);
+          openDialog("Sirius Guard Will never release :laugh:");
         }
       }, 1000);
 
@@ -97,9 +97,9 @@
 
         if (answer.toLowerCase() === "zumo") {
           clearInterval(intervalId);
-          openDialog("Zumo is the hottest!!1!");
+          openDialog("Zumo is the hottest!");
         } else if (answer.toLowerCase() === "gigi") {
-          openDialog("Gigi is the hot but not more than zumo <3!1!1");
+          openDialog("Gigi is hot but not as hot as zumo!1!1!");
         } else {
           openDialog("Wrong!1!1");
         }
