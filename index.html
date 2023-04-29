@@ -25,7 +25,7 @@
         color: black;
         margin-bottom: 2rem;
       }
-      form {
+      #input {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -42,7 +42,7 @@
         border-radius: 5px;
         outline: none;
       }
-      input[type="submit"] {
+      button {
         padding: 10px 20px;
         background-color: black;
         color: white;
@@ -51,44 +51,65 @@
         cursor: pointer;
         transition: all 0.2s ease-in-out;
       }
-      input[type="submit"]:hover {
+      button:hover {
         transform: scale(1.1);
       }
     </style>
   </head>
   <body>
+    <dialog id="dialog">
+      <p id="dialogContent"></p>
+      <button id="close">Close</button>
+    </dialog>
     <div class="title">Sirius Guard Release</div>
     <div id="timer">Time left: <span id="time">60</span></div>
-    <form>
+    <div id="input">
       <label for="answer">who is the hottest sirius staff member</label>
-      <input type="text" id="answer" name="answer">
-      <br>
-      <input type="submit" value="Submit" onclick="checkAnswer()">
-    </form>
+      <input type="text" id="answer" name="answer" />
+      <br />
+      <button id="submit" type="button">Submit</button>
+    </div>
     <script>
-      var timeLeft = 60;
-      var timer = document.getElementById("time");
-
-      function updateTime() {
-        timer.innerHTML = timeLeft;
+      // Timer
+      let timer = document.getElementById("time");
+      let timeLeft = 5;
+      let intervalId = setInterval(function () {
         timeLeft--;
-        if (timeLeft < -1) {
+        timer.textContent = timeLeft;
+        if (timeLeft === 0) {
+          dialog.showModal();
           clearInterval(intervalId);
-          alert("Sirius Guard Will never release :laugh:");
         }
-      }
+      }, 1000);
 
-      var intervalId = setInterval(updateTime, 1000);
+      // Dialog
+      let dialog = document.getElementById("dialog");
+      let dialogContent = document.getElementById("dialogContent");
+      function openDialog(text) {
+        dialogContent.textContent = text;
+        dialog.showModal();
+      }
 
       function checkAnswer() {
-        var answer = document.getElementById("answer").value;
+        let inputanswer = document.getElementById("answer");
+        let answer = inputanswer.value;
+        inputanswer.value = "";
+
         if (answer.toLowerCase() === "zumo") {
           clearInterval(intervalId);
-          alert("Zumo is the hottest!");
+          openDialog("Zumo is the hottest!!1!");
+        } else if (answer.toLowerCase() === "gigi") {
+          openDialog("Gigi is the hot but not more than zumo <3!1!1");
         } else {
-          alert("Wrong!1!1");
+          openDialog("Wrong!1!1");
         }
       }
+
+      document.getElementById("submit").addEventListener("click", checkAnswer);
+
+      document.getElementById("close").addEventListener("click", function () {
+        dialog.close();
+      });
     </script>
   </body>
 </html>
